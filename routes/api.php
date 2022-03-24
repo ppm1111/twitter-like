@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Login;
+use App\Http\Controllers\Auth\Logout;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +16,6 @@ use App\Http\Controllers\Auth\Login;
 */
 
 Route::post('/login', Login::class);
-// Route::middleware(['jwt.auth'])->group(function () {
-
-// });
+Route::middleware(['jwt.auth'])->group(function () {
+    Route::post('/logout', Logout::class);
+});

@@ -6,7 +6,8 @@ use App\Exceptions\ForbidenException;
 
 class AuthServiceImpl implements AuthService  {
 
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
 
         $jwtToken = auth('api')->attempt(['email' => $email, 'password' => $password]);
         if (!$jwtToken) {
@@ -28,7 +29,8 @@ class AuthServiceImpl implements AuthService  {
         ];
     }
 
-    public function logout() {
-
+    public function logout()
+    {
+        auth('api')->logout();
     }
 }
