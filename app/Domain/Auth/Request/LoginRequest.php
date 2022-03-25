@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Domain\Auth\Request;
 
 use App\Exceptions\UnprocessableEntityException;
 use Illuminate\Foundation\Http\FormRequest;

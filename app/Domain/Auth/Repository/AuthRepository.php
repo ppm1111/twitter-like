@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Domain\Auth\Repository;
 
-interface AuthRepository {
-    
+interface AuthRepository
+{
+
     public function checkAuth($email, $password);
 
     public function getUser();

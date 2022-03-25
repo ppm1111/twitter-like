@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repository;
+
 use App\Domain\Auth\Repository\AuthRepository;
 
 class AuthRepositoryImpl implements AuthRepository

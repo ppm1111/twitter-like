@@ -3,9 +3,9 @@
 namespace App\Domain\Auth\Controller;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Domain\Auth\Request\LoginRequest;
+use App\Domain\Auth\Resource\LoginResource;
 use App\Domain\Auth\Service\Contract\AuthService;
-use App\Http\Resources\Auth\LoginResource;
 
 class Login extends Controller
 {

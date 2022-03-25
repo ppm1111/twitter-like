@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domain\Auth\Service;
 
 use App\Domain\Auth\Service\Contract\AuthService;
