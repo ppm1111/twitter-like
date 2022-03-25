@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\Login;
-use App\Http\Controllers\Auth\Logout;
+use App\Domain\Auth\Controller\Login;
+use App\Domain\Auth\Controller\Logout;
 /*
 |--------------------------------------------------------------------------
 | API Routes
