@@ -11,9 +11,4 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository
     {
         $this->model = $model;
     }
-
-    public function getUser()
-    {
-        return auth('api')->user();
-    }
 }

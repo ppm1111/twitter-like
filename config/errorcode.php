@@ -62,7 +62,11 @@ return [
             'POST_NOT_FOUND' => [
                 'code' => '002',
                 'template' => 'post is not found',
-            ]
+            ],
+            'CANNOT_FOLLOW_MYSELF' => [
+                'code' => '003',
+                'template' => 'can not follow myself',
+            ],
         ],
     ],
 ];

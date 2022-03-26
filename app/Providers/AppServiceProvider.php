@@ -11,6 +11,8 @@ use App\Domain\Post\Service\Contract\GetPost;
 use App\Domain\Post\Service\GetPostImpl;
 use App\Domain\Post\Service\Contract\DeletePost;
 use App\Domain\Post\Service\DeletePostImpl;
+use App\Domain\Post\Service\Contract\FollowUser;
+use App\Domain\Post\Service\FollowUserImpl;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,5 +37,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CreatePost::class, CreatePostImpl::class);
         $this->app->bind(GetPost::class, GetPostImpl::class);
         $this->app->bind(DeletePost::class, DeletePostImpl::class);
+        $this->app->bind(FollowUser::class, FollowUserImpl::class);
     }
 }

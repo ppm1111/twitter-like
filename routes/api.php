@@ -8,6 +8,7 @@ use App\Domain\Post\Controller\CreatePost;
 use App\Domain\Post\Controller\GetPost;
 use App\Domain\Post\Controller\GetSinglePost;
 use App\Domain\Post\Controller\DeletePost;
+use App\Domain\Post\Controller\FollowUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/posts/{id}', GetSinglePost::class)->where('id', '^([0-9]|[1-9][0-9]+)$');
     Route::delete('/posts/{id}', DeletePost::class)->where('id', '^([0-9]|[1-9][0-9]+)$');
 
-    // Route::post('/posts/{id}/follow', Logout::class);
+    Route::post('/follow', FollowUser::class);
     // Route::post('/posts/{id}/reply', Logout::class);
     // Route::post('/posts/{id}/favorite', Logout::class);
     // Route::post('/posts/{id}/star', Logout::class);
