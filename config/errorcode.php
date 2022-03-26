@@ -59,6 +59,10 @@ return [
                 'code' => '001',
                 'template' => 'parameter invalid',
             ],
+            'POST_NOT_FOUND' => [
+                'code' => '002',
+                'template' => 'post is not found',
+            ]
         ],
     ],
 ];

@@ -9,6 +9,8 @@ use App\Domain\Post\Service\Contract\CreatePost;
 use App\Domain\Post\Service\CreatePostImpl;
 use App\Domain\Post\Service\Contract\GetPost;
 use App\Domain\Post\Service\GetPostImpl;
+use App\Domain\Post\Service\Contract\DeletePost;
+use App\Domain\Post\Service\DeletePostImpl;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AuthService::class, AuthServiceImpl::class);
         $this->app->bind(CreatePost::class, CreatePostImpl::class);
         $this->app->bind(GetPost::class, GetPostImpl::class);
+        $this->app->bind(DeletePost::class, DeletePostImpl::class);
     }
 }

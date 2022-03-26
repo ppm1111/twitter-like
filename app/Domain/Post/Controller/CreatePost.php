@@ -3,7 +3,7 @@
 namespace App\Domain\Post\Controller;
 
 use App\Http\Controllers\Controller;
-use App\Domain\Post\Request\CreatePostRequest;
+use App\Domain\Post\Request\SimplePostResource;
 use App\Domain\Post\Service\Contract\CreatePost as CreatePostService;
 use App\Domain\Post\Resource\PostResource;
 
@@ -21,6 +21,6 @@ class CreatePost extends Controller
         $text = request()->text;
         $post = $this->createPostService->create($text);
 
-        return new CreatePostResource($post);
+        return new SimplePostResource($post);
     }
 }

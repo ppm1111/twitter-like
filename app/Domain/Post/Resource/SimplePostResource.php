@@ -4,7 +4,7 @@ namespace App\Domain\Post\Resource;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CreatePostResource extends JsonResource
+class SimplePostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
