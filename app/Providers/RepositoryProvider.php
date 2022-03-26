@@ -13,6 +13,8 @@ use App\Domain\Post\Repository\UserRepository;
 use App\Repository\UserRepositoryImpl;
 use App\Domain\Post\Repository\ReplyRepository;
 use App\Repository\ReplyRepositoryImpl;
+use App\Domain\Post\Repository\StarRecordRepository;
+use App\Repository\StarRecordRepositoryImpl;
 
 class RepositoryProvider extends ServiceProvider
 {
@@ -38,5 +40,6 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(PostAuthRepository::class, PostAuthRepositoryImpl::class);
         $this->app->bind(UserRepository::class, UserRepositoryImpl::class);
         $this->app->bind(ReplyRepository::class, ReplyRepositoryImpl::class);
+        $this->app->bind(StarRecordRepository::class, StarRecordRepositoryImpl::class);
     }
 }

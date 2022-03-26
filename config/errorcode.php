@@ -67,6 +67,10 @@ return [
                 'code' => '003',
                 'template' => 'can not follow myself',
             ],
+            'POST_ALREADY_STAR' => [
+                'code' => '004',
+                'template' => 'user already star this post',
+            ]
         ],
     ],
 ];

@@ -11,6 +11,7 @@ use App\Domain\Post\Controller\DeletePost;
 use App\Domain\Post\Controller\FollowUser;
 use App\Domain\Post\Controller\ReplyPost;
 use App\Domain\Post\Controller\FavoritePost;
+use App\Domain\Post\Controller\StarPost;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/follow', FollowUser::class);
     Route::post('/posts/{id}/reply', ReplyPost::class);
     Route::post('/posts/{id}/favorite', FavoritePost::class)->where('id', '^([0-9]|[1-9][0-9]+)$');
-    // Route::post('/posts/{id}/star', Logout::class);
+    Route::post('/posts/{id}/star', StarPost::class);
     // Route::post('/posts/{id}/share', Logout::class);
 });
 
