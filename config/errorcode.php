@@ -52,4 +52,13 @@ return [
             ],
         ],
     ],
+    'post' => [
+        'code' => '03',
+        'errorType' => [
+            'POST_PARAMETER_INVALID' => [
+                'code' => '001',
+                'template' => 'parameter invalid',
+            ],
+        ],
+    ],
 ];

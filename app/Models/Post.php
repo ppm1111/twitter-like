@@ -10,4 +10,11 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'posts';
+
+    protected $fillable = [
+        'text',
+        'type',
+        'user_id',
+        'star',
+    ];
 }

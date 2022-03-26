@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Domain\Auth\Controller\Login;
 use App\Domain\Auth\Controller\Logout;
+use App\Domain\Post\Controller\CreatePost;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,4 +19,16 @@ use App\Domain\Auth\Controller\Logout;
 Route::post('/login', Login::class);
 Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/logout', Logout::class);
+    Route::post('/posts', CreatePost::class);
+    // Route::get('/posts', Logout::class);
+    // Route::get('/posts/{id}', Logout::class);
+    // Route::delete('/posts/{id}', Logout::class);
+
+    // Route::post('/posts/{id}/follow', Logout::class);
+    // Route::post('/posts/{id}/reply', Logout::class);
+    // Route::post('/posts/{id}/favorite', Logout::class);
+    // Route::post('/posts/{id}/star', Logout::class);
+    // Route::post('/posts/{id}/share', Logout::class);
 });
+
+//  Route::post('/logout', Logout::class);
