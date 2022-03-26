@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepliesTables extends Migration
+class CreateUserPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateRepliesTables extends Migration
      */
     public function up()
     {
-        Schema::create('replies_tables', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('text');
+        Schema::create('user_posts', function (Blueprint $table) {
             $table->bigInteger('user_id');
             $table->bigInteger('post_id');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ class CreateRepliesTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replies_tables');
+        Schema::dropIfExists('user_posts');
     }
 }
