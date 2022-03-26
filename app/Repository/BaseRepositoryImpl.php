@@ -8,12 +8,12 @@ class BaseRepositoryImpl implements BaseRepository
 
     public function getById($id)
     {
-        return $this->model->getById($id);
+        return $this->model->where('id', $id)->first();
     }
 
     public function getAll()
     {
-        return $this->model->getAll();
+        return $this->model->all();
     }
 
     public function create($data)
