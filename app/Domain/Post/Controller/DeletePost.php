@@ -3,10 +3,9 @@
 namespace App\Domain\Post\Controller;
 
 use App\Http\Controllers\Controller;
-use App\Domain\Post\Request\DeletePostRequest;
 use App\Domain\Post\Service\Contract\GetPost as GetPostService;
 use App\Domain\Post\Service\Contract\DeletePost as DeletePostService;
-use App\Domain\Post\Resource\PostResource;
+use App\Domain\Post\Resource\SimplePostResource;
 use App\Exceptions\ForbidenException;
 
 class DeletePost extends Controller
