@@ -15,6 +15,8 @@ use App\Domain\Post\Service\Contract\FollowUser;
 use App\Domain\Post\Service\FollowUserImpl;
 use App\Domain\Post\Service\Contract\ReplyPost;
 use App\Domain\Post\Service\ReplyPostImpl;
+use App\Domain\Post\Service\Contract\FavoritePost;
+use App\Domain\Post\Service\FavoritePostImpl;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,5 +43,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DeletePost::class, DeletePostImpl::class);
         $this->app->bind(FollowUser::class, FollowUserImpl::class);
         $this->app->bind(ReplyPost::class, ReplyPostImpl::class);
+        $this->app->bind(FavoritePost::class, FavoritePostImpl::class);
     }
 }

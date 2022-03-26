@@ -11,4 +11,10 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository
     {
         $this->model = $model;
     }
+
+    public function attachUser($id, $userId)
+    {
+       $post = $this->model->find($id);
+       $post->users()->attach($userId);
+    }
 }

@@ -17,4 +17,10 @@ class Post extends Model
         'user_id',
         'star',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_posts', 'post_id', 'user_id')
+            ->using(UserPost::class);
+    }
 }
