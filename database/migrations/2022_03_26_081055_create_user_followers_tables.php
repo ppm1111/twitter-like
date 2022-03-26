@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateUserFollowersTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('text');
+        Schema::create('user_followers_tables', function (Blueprint $table) {
             $table->bigInteger('user_id');
-            $table->integer('star');
-            $table->string('type');
+            $table->bigInteger('follower_id');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('user_followers_tables');
     }
 }
