@@ -11,6 +11,8 @@ use App\Domain\Post\Repository\AuthRepository as PostAuthRepository;
 use App\Repository\PostAuthRepositoryImpl;
 use App\Domain\Post\Repository\UserRepository;
 use App\Repository\UserRepositoryImpl;
+use App\Domain\Post\Repository\ReplyRepository;
+use App\Repository\ReplyRepositoryImpl;
 
 class RepositoryProvider extends ServiceProvider
 {
@@ -35,5 +37,6 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(PostRepository::class, PostRepositoryImpl::class);
         $this->app->bind(PostAuthRepository::class, PostAuthRepositoryImpl::class);
         $this->app->bind(UserRepository::class, UserRepositoryImpl::class);
+        $this->app->bind(ReplyRepository::class, ReplyRepositoryImpl::class);
     }
 }
