@@ -3,9 +3,9 @@
 namespace App\Domain\Post\Controller;
 
 use App\Http\Controllers\Controller;
-use App\Domain\Post\Request\SimplePostResource;
+use App\Domain\Post\Request\CreatePostRequest;
 use App\Domain\Post\Service\Contract\CreatePost as CreatePostService;
-use App\Domain\Post\Resource\PostResource;
+use App\Domain\Post\Resource\SimplePostResource;
 
 class CreatePost extends Controller
 {
