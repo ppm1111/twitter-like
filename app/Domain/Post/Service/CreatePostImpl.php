@@ -28,6 +28,7 @@ class CreatePostImpl implements CreatePost
             'text' => $text,
             'type' => 'POST',
             'user_id' => $user->id,
+            'share_post_id' => null,
             'star' => 0
         ];
 

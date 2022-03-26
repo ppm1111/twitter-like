@@ -70,6 +70,14 @@ return [
             'POST_ALREADY_STAR' => [
                 'code' => '004',
                 'template' => 'user already star this post',
+            ],
+            'CANNOT_SHARE_MYSELF' => [
+                'code' => '005',
+                'template' => 'can not share with myself',
+            ],
+            'POST_ALREADY_SHARE' => [
+                'code' => '006',
+                'template' => 'already share this post to specify user',
             ]
         ],
     ],

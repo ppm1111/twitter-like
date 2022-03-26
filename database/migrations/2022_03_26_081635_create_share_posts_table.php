@@ -1,10 +1,10 @@
-<?php
+2022_03_26_081635_create_star_records_table<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateSharePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('share_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('text');
             $table->bigInteger('user_id');
-            $table->integer('star');
+            $table->bigInteger('post_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('share_posts');
     }
 }

@@ -13,7 +13,6 @@ class Post extends Model
 
     protected $fillable = [
         'text',
-        'type',
         'user_id',
         'star',
     ];

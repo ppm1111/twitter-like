@@ -53,9 +53,6 @@ class StarPostImpl implements StarPost
     public function checkAlreadyStar($userId, $postId)
     {
         $record = $this->starRecordRepo->getByUserIdAndPostId($userId, $postId);
-        \Log::info($userId);
-        \Log::info($postId);
-        \Log::info($record);
         if (!empty($record)) {
             $data = [
                 'module' => 'post',
