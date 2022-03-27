@@ -28,11 +28,10 @@ class StarPostImpl implements StarPost
     public function star($id, $userId)
     {
         $post = $this->postRepo->getById($id);
-        $this->checkAlreadyStar($userId, $post->id);
+        $this->checkAlreadyStar($post->id, $userId);
         $star = intval($post->star) + 1;
 
         DB::beginTransaction();
-
         try {
             $this->postRepo->updateById($id, [
                 'star' => $star
