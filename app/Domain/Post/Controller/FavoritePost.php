@@ -7,19 +7,23 @@ use App\Domain\Post\Service\Contract\GetPost as GetPostService;
 use App\Domain\Post\Service\Contract\FavoritePost as FavoritePostService;
 use App\Domain\Post\Resource\SimplePostResource;
 use App\Exceptions\ForbidenException;
+use App\Domain\Post\Service\Contract\GetAuth;
 
 class FavoritePost extends Controller
 {
     private $getPostService;
     private $favoritePostService;
+    private $getAuthService;
 
     public function __construct(
         GetPostService $getPostService,
-        FavoritePostService $favoritePostService
+        FavoritePostService $favoritePostService,
+        GetAuth $getAuthService
         )
     {
         $this->getPostService = $getPostService;
         $this->favoritePostService = $favoritePostService;
+        $this->getAuthService = $getAuthService;
     }
 
     public function __invoke($id)
@@ -32,8 +36,9 @@ class FavoritePost extends Controller
             ];
             throw new ForbidenException($data);
         }
-
-        $this->favoritePostService->favorite($id);
+        
+        $user = $this->getAuthService->get();
+        $this->favoritePostService->favorite($id, $user->id);
 
         return new SimplePostResource($post);
     }
