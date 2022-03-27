@@ -21,10 +21,9 @@ class FollowUserImpl implements FollowUser
         $this->authRepo = $authRepo;
     }
 
-    public function follow($id)
+    public function follow($id, $userId)
     {
-        $user = $this->authRepo->getAuth();
-        if ($id == $user->id) {
+        if ($id == $userId) {
             $data = [
                 'module' => 'post',
                 'errorType' => 'CANNOT_FOLLOW_MYSELF',
@@ -32,6 +31,6 @@ class FollowUserImpl implements FollowUser
             throw new ForbidenException($data);
         }
 
-        return $this->userRepo->syncUserFollowers($user->id, $id);
+        return $this->userRepo->syncUserFollowers($userId, $id);
     }
 }

@@ -4,5 +4,5 @@ namespace App\Domain\Post\Service\Contract;
 
 interface FollowUser
 {
-    public function follow($id);
+    public function follow($id, $userId);
 }
