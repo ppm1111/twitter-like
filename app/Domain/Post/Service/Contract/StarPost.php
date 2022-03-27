@@ -4,7 +4,7 @@ namespace App\Domain\Post\Service\Contract;
 
 interface StarPost
 {
-    public function star($id);
+    public function star($id, $userId);
     
-    public function checkAlreadyStar($userId, $postId);
+    public function checkAlreadyStar($id, $userId);
 }

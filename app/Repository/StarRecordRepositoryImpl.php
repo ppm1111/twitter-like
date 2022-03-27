@@ -12,11 +12,11 @@ class StarRecordRepositoryImpl extends BaseRepositoryImpl implements StarRecordR
         $this->model = $model;
     }
 
-    public function getByUserIdAndPostId($userId, $postId)
+    public function getByUserIdAndPostId($id, $userId)
     {
         return $this->model
+            ->where('post_id', $id)
             ->where('user_id', $userId)
-            ->where('post_id', $postId)
             ->first();
     }
 }

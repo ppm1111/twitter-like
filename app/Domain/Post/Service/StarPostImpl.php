@@ -25,11 +25,10 @@ class StarPostImpl implements StarPost
         $this->starRecordRepo = $starRecordRepo;
     }
 
-    public function star($id)
+    public function star($id, $userId)
     {
-        $user = $this->authRepo->getAuth();
         $post = $this->postRepo->getById($id);
-        $this->checkAlreadyStar($user->id, $post->id);
+        $this->checkAlreadyStar($userId, $post->id);
         $star = intval($post->star) + 1;
 
         DB::beginTransaction();
@@ -40,7 +39,7 @@ class StarPostImpl implements StarPost
             ]);
 
             $data = [
-                'user_id' => $user->id,
+                'user_id' => $userId,
                 'post_id' => $post->id,
             ];
             $this->starRecordRepo->create($data);
@@ -50,9 +49,9 @@ class StarPostImpl implements StarPost
         }
     }
 
-    public function checkAlreadyStar($userId, $postId)
+    public function checkAlreadyStar($id, $userId)
     {
-        $record = $this->starRecordRepo->getByUserIdAndPostId($userId, $postId);
+        $record = $this->starRecordRepo->getByUserIdAndPostId($id, $userId);
         if (!empty($record)) {
             $data = [
                 'module' => 'post',
