@@ -5,7 +5,7 @@ namespace App\Domain\Post\Controller;
 use App\Http\Controllers\Controller;
 use App\Domain\Post\Service\Contract\GetPost as GetPostService;
 use App\Domain\Post\Service\Contract\FavoritePost as FavoritePostService;
-use App\Domain\Post\Resource\PostResource;
+use App\Domain\Post\Resource\SimplePostResource;
 use App\Exceptions\ForbidenException;
 
 class FavoritePost extends Controller
@@ -35,6 +35,6 @@ class FavoritePost extends Controller
 
         $this->favoritePostService->favorite($id);
 
-        return new PostResource($post);
+        return new SimplePostResource($post);
     }
 }

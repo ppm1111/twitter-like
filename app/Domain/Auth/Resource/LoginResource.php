@@ -21,7 +21,7 @@ class LoginResource extends JsonResource
     {
         return [
             'code' => '00000',
-            'message' => 'login success',
+            'message' => 'success',
         ];
     }
 }
