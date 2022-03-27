@@ -4,7 +4,6 @@ namespace App\Domain\Post\Service;
 
 use App\Domain\Post\Service\Contract\SharePost;
 use App\Domain\Post\Repository\PostRepository;
-use App\Domain\Post\Repository\AuthRepository;
 use App\Domain\Post\Repository\SharePostRepository;
 use App\Exceptions\ForbidenException;
 use DB;
@@ -12,25 +11,21 @@ use DB;
 class SharePostImpl implements SharePost
 {
     private $postRepo;
-    private $authRepo;
     private $sharePostRepo;
 
     public function __construct(
         PostRepository $postRepo,
-        AuthRepository $authRepo,
         SharePostRepository $sharePostRepo
         )
     {
         $this->postRepo = $postRepo;
-        $this->authRepo = $authRepo;
         $this->sharePostRepo = $sharePostRepo;
     }
 
-    public function share($id, $userId)
+    public function share($id, $fromUserId, $userId)
     {
-        $user = $this->authRepo->getAuth();
-        $this->checkAlreadyShare($id, $user->id);
-        if ($user->id == $userId) {
+        $this->checkAlreadyShare($id, $fromUserId, $userId);
+        if ($fromUserId == $userId) {
             $data = [
                 'module' => 'post',
                 'errorType' => 'CANNOT_SHARE_MYSELF',
@@ -40,15 +35,16 @@ class SharePostImpl implements SharePost
 
         $post = $this->postRepo->getById($id);
         $data = [
-            'user_id' => $userId,
+            'share_user_id' => $userId,
+            'from_user_id' => $fromUserId,
             'post_id' => $post->id,
         ];
         $this->sharePostRepo->create($data);
     }
 
-    public function checkAlreadyShare($postId, $userId)
+    public function checkAlreadyShare($id, $fromUserId, $userId)
     {
-        $record = $this->sharePostRepo->getByUserIdAndPostId($postId, $userId);
+        $record = $this->sharePostRepo->getByUserIdAndPostId($id, $fromUserId, $userId);
         if (!empty($record)) {
             $data = [
                 'module' => 'post',

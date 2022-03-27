@@ -12,11 +12,12 @@ class SharePostRepositoryImpl extends BaseRepositoryImpl implements SharePostRep
         $this->model = $model;
     }
 
-    public function getByUserIdAndPostId($postId, $userId)
+    public function getByUserIdAndPostId($id, $fromUserId, $userId)
     {
         return $this->model
-            ->where('post_id', $postId)
-            ->where('user_id', $userId)
+            ->where('post_id', $id)
+            ->where('share_user_id', $userId)
+            ->where('from_user_id', $fromUserId)
             ->first();
     }
 }

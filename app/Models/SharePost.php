@@ -9,7 +9,8 @@ class SharePost extends Model
     protected $table = 'share_posts';
 
     protected $fillable = [
-        'user_id',
+        'share_user_id',
+        'from_user_id',
         'post_id',
     ];
 }

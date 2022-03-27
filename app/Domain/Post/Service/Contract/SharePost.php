@@ -4,7 +4,7 @@ namespace App\Domain\Post\Service\Contract;
 
 interface SharePost
 {
-    public function share($id, $userId);
+    public function share($id, $fromUserId, $userId);
 
-    public function checkAlreadyShare($postId, $userId);
+    public function checkAlreadyShare($postId, $fromUserId, $userId);
 }

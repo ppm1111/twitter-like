@@ -5,22 +5,26 @@ namespace App\Domain\Post\Controller;
 use App\Http\Controllers\Controller;
 use App\Domain\Post\Service\Contract\GetPost as GetPostService;
 use App\Domain\Post\Service\Contract\SharePost as SharePostService;
-use App\Domain\Post\Resource\PostResource;
+use App\Domain\Post\Resource\SimplePostResource;
 use App\Domain\Post\Request\SharePostRequest;
 use App\Exceptions\ForbidenException;
+use App\Domain\Post\Service\Contract\GetAuth;
 
 class SharePost extends Controller
 {
     private $getPostService;
     private $sharePostService;
+    private $getAuthService;
 
     public function __construct(
         GetPostService $getPostService,
-        SharePostService $sharePostService
+        SharePostService $sharePostService,
+        GetAuth $getAuthService
         )
     {
         $this->getPostService = $getPostService;
         $this->sharePostService = $sharePostService;
+        $this->getAuthService = $getAuthService;
     }
 
     public function __invoke(SharePostRequest $request, $id)
@@ -35,8 +39,9 @@ class SharePost extends Controller
             throw new ForbidenException($data);
         }
 
-        $this->sharePostService->share($id, $userId);
+        $user = $this->getAuthService->get();
+        $this->sharePostService->share($id, $user->id, $userId);
 
-        return new PostResource($post);
+        return new SimplePostResource($post);
     }
 }
