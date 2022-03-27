@@ -17,7 +17,14 @@ class FavoritePostImpl implements FavoritePost
 
     public function favorite($id, $userId)
     {
-        $check = $this->checkAlreadYFavorite($id, $userId);
+        $this->checkAlreadyFavorite($id, $userId);
+        $this->postRepo->attachUser($id, $userId);
+    }
+
+    public function checkAlreadyFavorite($id, $userId)
+    {
+        $user = $this->postRepo->getPostFavoredUser($id, $userId);
+        $check = $user->count() == 0 ? false : true;
         if ($check) {
             $data = [
                 'module' => 'post',
@@ -25,13 +32,5 @@ class FavoritePostImpl implements FavoritePost
             ];
             throw new ForbidenException($data);
         }
-        $this->postRepo->attachUser($id, $userId);
-    }
-
-    public function checkAlreadyFavorite($id, $userId)
-    {
-        $user = $this->postRepo->getPostFavoredUser($id, $userId);
-        
-        return $user->count() == 0 ? false : true;
     }
 }
