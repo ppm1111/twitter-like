@@ -21,7 +21,8 @@ use App\Domain\Post\Service\Contract\StarPost;
 use App\Domain\Post\Service\StarPostImpl;
 use App\Domain\Post\Service\Contract\SharePost;
 use App\Domain\Post\Service\SharePostImpl;
-
+use App\Domain\Post\Service\Contract\GetAuth;
+use App\Domain\Post\Service\GetAuthImpl;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,5 +52,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(FavoritePost::class, FavoritePostImpl::class);
         $this->app->bind(StarPost::class, StarPostImpl::class);
         $this->app->bind(SharePost::class, SharePostImpl::class);
+        $this->app->bind(GetAuth::class, GetAuthImpl::class);
     }
 }

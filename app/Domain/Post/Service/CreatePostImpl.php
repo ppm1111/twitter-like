@@ -10,25 +10,19 @@ use App\Exceptions\ForbidenException;
 class CreatePostImpl implements CreatePost
 {
     private $postRepo;
-    private $authRepo;
 
     public function __construct(
-        PostRepository $postRepo,
-        AuthRepository $authRepo
+        PostRepository $postRepo
         )
     {
         $this->postRepo = $postRepo;
-        $this->authRepo = $authRepo;
     }
 
-    public function create($text)
+    public function create($userId, $text)
     {
-        $user = $this->authRepo->getAuth();
         $data = [
             'text' => $text,
-            'type' => 'POST',
-            'user_id' => $user->id,
-            'share_post_id' => null,
+            'user_id' => $userId,
             'star' => 0
         ];
 
