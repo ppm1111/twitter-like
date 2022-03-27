@@ -49,8 +49,6 @@ class SharePostImpl implements SharePost
     public function checkAlreadyShare($postId, $userId)
     {
         $record = $this->sharePostRepo->getByUserIdAndPostId($postId, $userId);
-        \Log::info($postId);
-        \Log::info($userId);
         if (!empty($record)) {
             $data = [
                 'module' => 'post',
