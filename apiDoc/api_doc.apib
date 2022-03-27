@@ -1,23 +1,396 @@
 FORMAT: 1A
 
-# The Simplest API
-This is one of the simplest APIs written in the **API Blueprint**. One plain
-resource combined with a method and that's it! We will explain what is going on
-in the next installment - 
-[Resource and Actions](02.%20Resource%20and%20Actions.md).
+# Twitter-like api
+Twitter-like api 文件
 
-**Note:** As we progress through the examples, do not also forget to view the
-[Raw](https://raw.github.com/apiaryio/api-blueprint/master/examples/01.%20Simplest%20API.md)
-code to see what is really going on in the API Blueprint, as opposed to just
-seeing the output of the Github Markdown parser.
+# Group Auth
+授權類 api
 
-Also please keep in mind that every single example in this course is a **real
-API Blueprint** and as such you can **parse** it with the 
-[API Blueprint parser](https://github.com/apiaryio/drafter) or one of its
-[bindings](https://github.com/apiaryio/drafter#bindings).
+登入跟登出功能
 
+## Auth [/auth]
 
-# GET /message
-+ Response 200 (text/plain)
+### login [POST /login]
 
-        Hello World!
+**參數說明**
+
+<table>
+    <tr>
+        <th>參數名稱</th>
+        <th>型別</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>string</td>
+        <td>必填，必須符合email格式</td>
+    </tr>
+     <tr>
+        <td>password</td>
+        <td>string</td>
+        <td>必填</td>
+    </tr>
+</table>
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+            {
+                "email": "a@b.com",
+                "password": "1111",
+            }
+
++ Response 200 (applicato=ion/json)
+
+        {
+            "data": {
+                "user_id": 1,
+                "name": "test",
+                "token_type": "Bearer",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FwaVwvbG9naW4iLCJpYXQiOjE2NDgzNzMyNTQsImV4cCI6MTY0ODU4OTI1NCwibmJmIjoxNjQ4MzczMjU0LCJqdGkiOiI5YWRTRkJtNnd3YWpRRGZtIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Yh-kyosFTvOFAUbGDByxGRMFGr9K0dQ-Kf2KONQT85U",
+                "expires_in": "3600 mins"
+            },
+            "code": "00000",
+            "message": "success",
+        }
+
+### logout [POST /logout]
+
+登出
+
++ Response 200 (applicato=ion/json)
+
+        {
+            "data": [],
+            "code": "00000",
+            "message": "success"
+        }
+
+# Group Posts
+Post 類 api
+
+包含取得、建立、刪除、star、喜歡、回覆、跟隨的操作
+
+## Post [/posts]
+
+### Get all posts [GET]
+
+**參數說明**
+
+無參數
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+                {
+                    "id": 1,
+                    "text": "test",
+                    "userId": 1,
+                    "star": 0,
+                    "createdAt": "2022-03-26 20:27:48"
+                }
+            ],
+            "code": "00000",
+            "message": "success"
+        }
+
+### Get single posts [GET /posts/{post_id}]
+
+**參數說明**
+
+無參數
+
++ Parameter
+
+    + post_id: 1 (number) - posts 的 id
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
++ Response 200
+
+        {
+            "data": {
+                "id": 1,
+                "text": "test",
+                "userId": 1,
+                "star": 0,
+                "createdAt": "2022-03-26 20:27:48"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Create posts [POST]
+
+**參數說明**
+
+<table>
+    <tr>
+        <th>參數名稱</th>
+        <th>型別</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>string</td>
+        <td>必填，長度限制255</td>
+    </tr>
+</table>
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
+    + Body
+
+        ```
+        {
+            "text": "test"
+        }
+        ```
+
++ Response 200
+
+        {
+            "data": {
+                "id": 2,
+                "userId": 1,
+                "createdAt": "2022-03-27 10:24:19"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Reply posts [POST /posts/{post_id}/reply]
+
+**參數說明**
+
+<table>
+    <tr>
+        <th>參數名稱</th>
+        <th>型別</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>string</td>
+        <td>必填，長度限制255</td>
+    </tr>
+</table>
+
++ Parameter
+
+    + post_id: 1 (number) - posts 的 id
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+    + Body
+
+        ```
+        {
+            "text": "reply test"
+        }
+        ```
+
++ Response 200
+
+        {
+            "data": {
+                "id": 1,
+                "userId": 1,
+                "createdAt": "2022-03-27 12:34:26"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Favorite posts [POST /posts/{post_id}/favorite]
+
+**參數說明**
+
+無參數
+
++ Parameter
+
+    + post_id: 1 (number) - posts 的 id
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
++ Response 200
+
+        {
+            "data": {
+                "id": 2,
+                "userId": 1,
+                "createdAt": "2022-03-27 10:24:19"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Star posts [POST /posts/{post_id}/star]
+
+**參數說明**
+
+無參數
+
++ Parameter
+
+    + post_id: 1 (number) - posts 的 id
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
++ Response 200
+
+        {
+            "data": {
+                "id": 2,
+                "userId": 1,
+                "createdAt": "2022-03-27 10:24:19"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Share posts [POST /posts/{post_id}/share]
+
+**參數說明**
+
+<table>
+    <tr>
+        <th>參數名稱</th>
+        <th>型別</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>integer</td>
+        <td>使用者id，必填，必須是存在的使用者</td>
+    </tr>
+</table>
+
++ Parameter
+
+    + post_id: 1 (number) - posts 的 id
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+    
+    + Body
+
+        ```
+        {
+            "userId": 1
+        }
+        ```
+
++ Response 200
+
+        {
+            "data": {
+                "id": 2,
+                "userId": 1,
+                "createdAt": "2022-03-27 10:24:19"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Delete posts [DELETE /posts/{post_id}]
+
+**參數說明**
+
+無參數
+
++ Parameter
+
+    + post_id: 1 (number) - posts 的 id
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+
++ Response 200
+
+        {
+            "data": {
+                "id": 1,
+                "userId": 1,
+                "createdAt": "2022-03-26 20:27:48"
+            },
+            "code": "00000",
+            "message": "success"
+        }
+
+### Follow users [POST /follow]
+
+**參數說明**
+
+<table>
+    <tr>
+        <th>參數名稱</th>
+        <th>型別</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>followerId</td>
+        <td>integer</td>
+        <td>使用者id，必填，必須是存在的使用者</td>
+    </tr>
+</table>
+
++ Request
+
+    + Headers
+
+            Accept: application/json
+    
+    + Body
+
+        ```
+        {
+            "followerId": 1
+        }
+        ```
+
++ Response 200
+
+        {
+            "data": [],
+            "code": "00000",
+            "message": "success"
+        }
