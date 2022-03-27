@@ -17,4 +17,10 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository
        $post = $this->model->find($id);
        $post->users()->attach($userId);
     }
+
+    public function getPostFavoredUser($id, $userId)
+    {
+        $post = $this->model->find($id);
+        return $post->users()->where('user_id', $userId)->get();
+    }
 }

@@ -78,6 +78,10 @@ return [
             'POST_ALREADY_SHARE' => [
                 'code' => '006',
                 'template' => 'already share this post to specify user',
+            ],
+            'ALREADY_FAVORITE' => [
+                'code' => '007',
+                'template' => 'already favorite this post',
             ]
         ],
     ],
