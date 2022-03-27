@@ -15,7 +15,8 @@ class FollowUser extends Controller
 
     public function __construct(
         FollowUserService $followUserService,
-        GetAuth $getAuthService)
+        GetAuth $getAuthService
+        )
     {
         $this->followUserService = $followUserService;
         $this->getAuthService = $getAuthService;
