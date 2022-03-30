@@ -31,18 +31,10 @@ class PostTest extends TestCase
         $this->seed();
     }
 
-    public function test_create_post()
-    {
-        $service = App::make(CreatePostImpl::class);
-        $userId = User::first()->id;
-        $text = 'test';
-
-        $post = $service->create($userId, $text);
-
-        $this->assertTrue($text == $post->text);
-    }
-
     // 不能分享給自己
+    /**
+    * @expectedException ForbidenException
+    */
     public function test_share_post_to_myself()
     {
         $post = Post::factory()->create();
@@ -51,26 +43,8 @@ class PostTest extends TestCase
         $fromUserId = $users->get(0)->id;
         $toUserId = $users->get(0)->id;
 
-        try {
-            $post = $service->share($post->id, $fromUserId, $toUserId);
-        } catch (ForbidenException $e) {
-           $this->assertTrue(true);
-           return;
-        }
-        $this->assertTrue(false);
-    }
-
-    public function test_share_post()
-    {
-        $post = Post::factory()->create();
-        $service = App::make(SharePostImpl::class);
-        $users = User::all();
-        $fromUserId = $users->get(0)->id;
-        $toUserId = $users->get(1)->id;
-
+        $this->expectException(ForbidenException::class);
         $service->share($post->id, $fromUserId, $toUserId);
-
-        $this->assertTrue(SharePost::count() == 1);
     }
 
     // 不能重複喜歡一個 post
@@ -80,16 +54,9 @@ class PostTest extends TestCase
         $service = App::make(FavoritePostImpl::class);
         $userId = User::first()->id;
 
-        try {
-            $service->favorite($post->id, $userId);
-            $service->favorite($post->id, $userId);
-        } catch (ForbidenException $e) {
-           $this->assertTrue(true);
-           return;
-        } catch (\Exception $e) {
-            return;
-         }
-        $this->assertTrue(false);
+        $this->expectException(ForbidenException::class);
+        $service->favorite($post->id, $userId);
+        $service->favorite($post->id, $userId);
     }
 
     // 不能跟隨給自己
@@ -101,13 +68,8 @@ class PostTest extends TestCase
         $fromUserId = $users->get(0)->id;
         $toUserId = $users->get(0)->id;
 
-        try {
-            $post = $service->follow($fromUserId, $toUserId);
-        } catch (ForbidenException $e) {
-           $this->assertTrue(true);
-           return;
-        }
-        $this->assertTrue(false);
+        $this->expectException(ForbidenException::class);
+        $post = $service->follow($fromUserId, $toUserId);
     }
 
     // 不能重複star post
@@ -117,14 +79,9 @@ class PostTest extends TestCase
         $service = App::make(StarPostImpl::class);
         $userId = User::first()->id;
 
-        try {
-            $service->star($post->id, $userId);
-            $service->star($post->id, $userId);
-        } catch (ForbidenException $e) {
-           $this->assertTrue(true);
-           return;
-        }
-        $this->assertTrue(false);
+        $this->expectException(ForbidenException::class);
+        $service->star($post->id, $userId);
+        $service->star($post->id, $userId);
     }
 
     // 測試是否能增加 star 數量
